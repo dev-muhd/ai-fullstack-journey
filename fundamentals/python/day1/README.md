@@ -1,12 +1,12 @@
 # Day 1 – Python Fundamentals
 
-## 🧠 Objective
+## Objective
 
 Understand and apply core Python basics through a mini project.
 
 ---
 
-## 📚 Concepts Practiced
+## Concepts Practiced
 
 - Variables and data types (`int`, `float`, `bool`, `str`)
 - Type casting
@@ -18,7 +18,7 @@ Understand and apply core Python basics through a mini project.
 
 ---
 
-## 🛠 Mini Project
+## Mini Project
 
 Built a personal information collector that:
 
@@ -31,7 +31,7 @@ Built a personal information collector that:
 
 ---
 
-## 🔑 Key Lesson
+## Key Lesson
 
 Never compute from unvalidated input.
 
@@ -40,6 +40,6 @@ Derived values come second.
 
 ---
 
-## 📌 Next Step
+## Next Step
 
 Day 2: Operators and conditionals.
