@@ -1,35 +1,5 @@
-def check_eligibility(age, grade, employed):
-    return age >= 18 and (grade >= 70 or employed)
-    
-def get_valid_age():
-    while True:
-        user_input = input("Enter age(or type 'exit'): ").strip().lower()
-        if user_input == "exit":
-            return None
-        
-        try:
-            age = int(user_input)
-            if age < 0:
-                print("Age can't be negative")
-                continue
-            return age
-        except ValueError:
-            print("Inavlid input. Please enter a numeric value")
-
-def get_valid_grade():
-    while True:
-        user_input = input("Enter grade(or type 'exit'): ").strip().lower()
-        if user_input == "exit":
-            return None
-        
-        try:
-            grade = int(user_input)
-            if grade < 0 or grade > 100:
-                print("Grade must be between 0 and 100.")
-                continue
-            return grade
-        except ValueError:
-            print("Invalid input. Please enter a whole number.")
+from eligibility import check_eligibility
+from utils import get_int_input
 
 def get_valid_employment():
     while True:
@@ -45,13 +15,9 @@ def get_valid_employment():
 
 def main():
     while True:
-        age = get_valid_age()
-        if age is None:
-            break
+        age = get_int_input("Enter age (or type 'exit'): ", min_value=0, max_value=60)
 
-        grade = get_valid_grade()
-        if grade is None:
-            break
+        grade = get_int_input(  "Enter grade (or type 'exit'): ", min_value=0,  max_value=100)
 
         employed = get_valid_employment()
         if employed is None:
