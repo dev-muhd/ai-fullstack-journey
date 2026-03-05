@@ -1,24 +1,19 @@
-# Day 3 — Student Loan Eligibility System
+# Day 3 & Day 4 — Student Loan Eligibility System
 
 ---
 
 ## Overview
 
-This project implements a Student Loan Eligibility System using core Python fundamentals.
+This project implements a modular **Student Loan Eligibility System** using core Python fundamentals.
 
-It focuses on disciplined control flow and strict input validation.
+The system evolved across **Day 3 and Day 4** from a single script into a more structured mini-application with:
 
-Concepts applied:
+* Separated business logic
+* Reusable validation utilities
+* Structured unit testing
+* Cleaner control flow design
 
-- Comparison operators
-- Logical operators (`and`, `or`)
-- Boolean expressions
-- Conditional statements (`if`, `elif`, `else`)
-- Nested decision structures
-- `while True` validation loops
-- `continue` control flow behavior
-
-The goal is to strengthen logical thinking and structured program design.
+The focus is **correctness, modular structure, and testability**.
 
 ---
 
@@ -26,9 +21,9 @@ The goal is to strengthen logical thinking and structured program design.
 
 Determine whether a student qualifies for a loan based on:
 
-- Age
-- Academic grade
-- Employment status
+* Age
+* Academic grade
+* Employment status
 
 ---
 
@@ -36,78 +31,140 @@ Determine whether a student qualifies for a loan based on:
 
 A student is eligible if:
 
-```
 age >= 18 AND (grade >= 70 OR employed == True)
-```
 
-This condition is implemented as a pure boolean expression inside a dedicated function.
-
----
-
-## Program Structure
-
-### Business Logic Layer
-
-`check_eligibility(age, grade, employed)`
-
-- Pure function
-- Returns `True` or `False`
-- Contains no input/output logic
+This rule is implemented as a **pure boolean expression inside a dedicated module**.
 
 ---
 
-### Input Validation Layer
+# Project Structure
 
-Functions:
+student-loan-eligibility/
 
-- `get_valid_age()`
-- `get_valid_grade()`
-- `get_valid_employment()`
-
-Each function:
-
-- Uses `while True` to enforce retries
-- Prevents invalid data from passing forward
-- Allows user to type `"exit"` to terminate early
-- Returns `None` when exiting
+│
+├── main.py
+├── utils.py
+├── eligibility.py
+├── test_eligibility.py
+└── README.md
 
 ---
 
-### Control Layer
+# Architecture Breakdown
 
-`main()`
+## 1. Business Logic Layer
+
+**eligibility.py**
+
+Contains the function:
+
+check_eligibility(age, grade, employed)
+
+Characteristics:
+
+* Pure function
+* No input/output logic
+* Returns only True or False
+* Easily testable
+
+This isolates the **core decision rule** from user interaction.
+
+---
+
+## 2. Validation Layer
+
+**utils.py**
+
+Contains reusable validation utilities.
+
+Example function:
+
+get_int_input(prompt, min_value=None, max_value=None)
+
+Features:
+
+* Generic integer validation
+* Optional minimum and maximum boundaries
+* Retry enforcement using `while True`
+* Exit handling via `"exit"`
+* Prevents invalid values from entering the system
+
+This removes **duplicate validation logic** across the program.
+
+---
+
+## 3. Control Layer
+
+**main.py**
 
 Responsible for:
 
-- Coordinating validation functions
-- Handling early exits
-- Managing retry prompts
-- Maintaining clean control flow
+* Coordinating validation functions
+* Handling early exits
+* Managing employment input
+* Calling the eligibility logic
+* Displaying results
+
+`main()` acts as the **program orchestrator**.
 
 ---
 
-## How to Run
+## 4. Testing Layer
 
-```bash
+**test_eligibility.py**
+
+Implements unit tests for the eligibility logic.
+
+The tests use **tuple-driven test cases**.
+
+Example structure:
+
+(age, grade, employed, expected_result)
+
+Each case is validated using assertions.
+
+---
+
+# How to Run
+
+Run the program:
+
 python main.py
-```
+
+Run the tests:
+
+python test_eligibility.py
+
+Execute commands from the **project root directory**.
 
 ---
 
-## What This Project Strengthened
+# Concepts Strengthened
 
-- Logical grouping of conditions
-- Avoiding messy nested conditionals
-- Understanding operator precedence
-- Clear separation of concerns
-- Designing retry systems using loops
-- Preventing fallthrough errors
+* Boolean logic design
+* Control flow discipline
+* Input validation systems
+* Separation of concerns
+* Modular programming
+* Assertion testing
+* Tuple unpacking
+* Fail-fast program design
 
 ---
 
-## Future Improvements
+# Key Design Decisions
 
-- Add unit tests for eligibility logic
-- Refactor validation into reusable utilities
-- Add input sanitization edge-case handling
-- Convert CLI system into API endpoint
+* Eligibility logic is **pure and isolated**
+* Validation logic is **reusable**
+* Control flow is centralized in `main()`
+* Tests validate logic **independent of CLI interaction**
+
+---
+
+# Future Improvements
+
+* Introduce `pytest`
+* Add automated test coverage
+* Convert CLI system into an API
+* Replace prints with structured logging
+* Package the project as a Python module
