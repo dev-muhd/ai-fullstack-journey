@@ -1,170 +1,130 @@
-# Day 3 & Day 4 — Student Loan Eligibility System
-
----
+# Loan Eligibility System (Learning Project)
 
 ## Overview
 
-This project implements a modular **Student Loan Eligibility System** using core Python fundamentals.
+This project is part of my **5-month Junior AI Full-Stack Programmer journey**.
 
-The system evolved across **Day 3 and Day 4** from a single script into a more structured mini-application with:
+Day 5 focused on transforming a simple Python script into a **modular backend-style system** with proper architecture and testing.
 
-* Separated business logic
-* Reusable validation utilities
-* Structured unit testing
-* Cleaner control flow design
-
-The focus is **correctness, modular structure, and testability**.
+The goal is to build strong fundamentals before moving into **AI systems and production applications**.
 
 ---
 
-## Objective
+# What Was Built Today (Day 5)
 
-Determine whether a student qualifies for a loan based on:
+## Modular Python Architecture
 
-* Age
-* Academic grade
-* Employment status
+The loan eligibility system was refactored into a modular structure:
+
+```
+loan_system/
+    eligibility.py
+    validation.py
+    storage.py
+```
+
+Each module has a clear responsibility.
+
+### eligibility.py
+
+Contains business logic for determining whether a loan applicant qualifies.
+
+Example logic:
+
+* Minimum income requirement
+* Credit score requirement
+* Employment status validation
 
 ---
 
-## Eligibility Rule
+### validation.py
 
-A student is eligible if:
+Handles **safe user input**.
 
-age >= 18 AND (grade >= 70 OR employed == True)
+Functions include:
 
-This rule is implemented as a **pure boolean expression inside a dedicated module**.
+* integer validation
+* employment type validation
+
+---
+
+### storage.py
+
+Handles **data persistence**.
+
+Currently saves approved loans to a file.
+
+---
+
+## Testing
+
+A testing directory was introduced:
+
+```
+tests/
+    test_eligibility.py
+```
+
+This validates that eligibility logic works correctly.
+
+Example test case:
+
+* Low credit score → rejected
+* High income + good credit → approved
+
+Testing ensures logic does not break when the system evolves.
 
 ---
 
 # Project Structure
 
-student-loan-eligibility/
+```
+loan_system/
+    __init__.py
+    eligibility.py
+    validation.py
+    storage.py
 
-│
-├── main.py
-├── utils.py
-├── eligibility.py
-├── test_eligibility.py
-└── README.md
+tests/
+    test_eligibility.py
 
----
-
-# Architecture Breakdown
-
-## 1. Business Logic Layer
-
-**eligibility.py**
-
-Contains the function:
-
-check_eligibility(age, grade, employed)
-
-Characteristics:
-
-* Pure function
-* No input/output logic
-* Returns only True or False
-* Easily testable
-
-This isolates the **core decision rule** from user interaction.
+main.py
+README.md
+```
 
 ---
 
-## 2. Validation Layer
+# What I Learned Today
 
-**utils.py**
-
-Contains reusable validation utilities.
-
-Example function:
-
-get_int_input(prompt, min_value=None, max_value=None)
-
-Features:
-
-* Generic integer validation
-* Optional minimum and maximum boundaries
-* Retry enforcement using `while True`
-* Exit handling via `"exit"`
-* Prevents invalid values from entering the system
-
-This removes **duplicate validation logic** across the program.
+* Python module structure
+* Package imports
+* Separating business logic from input handling
+* Creating reusable functions
+* Basic testing strategy
+* Debugging Python import paths
 
 ---
 
-## 3. Control Layer
+# Next Steps
 
-**main.py**
+Day 6 will introduce:
 
-Responsible for:
+* **Data persistence with JSON**
+* **Loan application history**
+* **Improved system architecture**
+* **More robust validation**
 
-* Coordinating validation functions
-* Handling early exits
-* Managing employment input
-* Calling the eligibility logic
-* Displaying results
-
-`main()` acts as the **program orchestrator**.
+The goal is to gradually transform this script into a **real backend-style application**.
 
 ---
 
-## 4. Testing Layer
+# Long Term Goal
 
-**test_eligibility.py**
+By the end of this phase, the system will evolve into:
 
-Implements unit tests for the eligibility logic.
+* a structured backend
+* with data persistence
+* tested business logic
+* API-ready architecture
 
-The tests use **tuple-driven test cases**.
-
-Example structure:
-
-(age, grade, employed, expected_result)
-
-Each case is validated using assertions.
-
----
-
-# How to Run
-
-Run the program:
-
-python main.py
-
-Run the tests:
-
-python test_eligibility.py
-
-Execute commands from the **project root directory**.
-
----
-
-# Concepts Strengthened
-
-* Boolean logic design
-* Control flow discipline
-* Input validation systems
-* Separation of concerns
-* Modular programming
-* Assertion testing
-* Tuple unpacking
-* Fail-fast program design
-
----
-
-# Key Design Decisions
-
-* Eligibility logic is **pure and isolated**
-* Validation logic is **reusable**
-* Control flow is centralized in `main()`
-* Tests validate logic **independent of CLI interaction**
-
----
-
-# Future Improvements
-
-* Introduce `pytest`
-* Add automated test coverage
-* Convert CLI system into an API
-* Replace prints with structured logging
-* Package the project as a Python module
+This will serve as the **foundation for later AI integrations**.
