@@ -1,17 +1,5 @@
-from eligibility import check_eligibility
-from utils import get_int_input
-
-def get_valid_employment():
-    while True:
-        user_input = input("Are you employed? (y/n) ").strip().lower()
-        if user_input in ("y", "yes"):
-            return True
-        elif user_input in ("n", "no"):
-            return False
-        elif user_input == "exit":
-            return None
-        else:
-            print("Answer yes(y) or no(n)")
+from loan_system.eligibility import check_eligibility
+from loan_system.validation import get_int_input, get_valid_employment
 
 def main():
     while True:
@@ -39,4 +27,5 @@ def main():
             else:
                 print("Please answer yes(y) or no(n).")
 
-main()
+if __name__ == "__main__":
+    main()

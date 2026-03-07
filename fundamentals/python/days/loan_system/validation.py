@@ -19,3 +19,15 @@ def get_int_input(prompt, min_value=None, max_value=None):
             continue
         
         return value
+    
+def get_valid_employment():
+    while True:
+        user_input = input("Are you employed? (y/n) ").strip().lower()
+        if user_input in ("y", "yes"):
+            return True
+        elif user_input in ("n", "no"):
+            return False
+        elif user_input == "exit":
+            return None
+        else:
+            print("Answer yes(y) or no(n)")

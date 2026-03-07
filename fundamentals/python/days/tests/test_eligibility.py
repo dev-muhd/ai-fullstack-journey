@@ -1,4 +1,4 @@
-from eligibility import check_eligibility
+from loan_system.eligibility import check_eligibility
 
 def run_tests():
     test_cases = [
