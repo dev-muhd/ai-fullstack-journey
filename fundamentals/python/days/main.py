@@ -1,24 +1,43 @@
 from loan_system.eligibility import check_eligibility
-from loan_system.validation import get_int_input, get_valid_employment
+from loan_system.validation import get_int_input, get_valid_employment, validate_age, validate_credit_score, validate_income
 
 def main():
     while True:
-        age = get_int_input("Enter age (or type 'exit'): ", min_value=0, max_value=60)
+        
+        
+        try:
+            age = get_int_input("Enter age (or type 'exit'): ")
 
-        grade = get_int_input(  "Enter grade (or type 'exit'): ", min_value=0,  max_value=100)
+            if age is None:
+                break
+            validate_age(age)
 
-        employed = get_valid_employment()
-        if employed is None:
-            break
+            credit_score = get_int_input("Enter credit score (or type 'exit'): ")
 
-        eligible = check_eligibility(age, grade, employed)
-        if eligible:
-            print("Eligible")
-        else:
-            print("Not Eligible")
+            if credit_score is None:
+                break
+            validate_credit_score(credit_score)
+
+            income = get_int_input("How much is your income (or type 'exit'): ")
+
+            if income is None:
+                break
+            validate_income(income)
+
+            employed = get_valid_employment()
+            if employed is None:
+                break
+            
+            eligible = check_eligibility(age, credit_score, income, employed)
+
+            print("Eligible" if eligible else "Not Eligible")
+
+        except ValueError as e:
+            print("Validation error:", e)
+            continue
 
         while True:
-            again = input("Check another student? (y/n or 'exit'): ").strip().lower()
+            again = input("Check another applicant? (y/n or 'exit'): ").strip().lower()
 
             if again in ("y", "yes"):
                 break
